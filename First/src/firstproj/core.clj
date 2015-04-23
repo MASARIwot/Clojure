@@ -1,6 +1,6 @@
 (ns firstproj.core)
 
-;position of current operation,counter
+;position of current operation,counter,iterator
 (def position (atom 1))
 
 ;map. save last three operation in type: 
