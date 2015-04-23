@@ -28,8 +28,8 @@
 
 ;observer (counter) of operation
 (defn imba
-  "f - function to memoize,
-   n - number of last calls to cache"
+  "x - function to memoize,
+   y - number of last calls to cache"
   [x y]
  (println "Last three operation,last result on position :" (deref position))
  ;add operation
