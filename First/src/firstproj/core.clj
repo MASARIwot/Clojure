@@ -23,10 +23,11 @@
   "x - function to memoize,
    y - number of last calls to cache"
   [x comand y]
- (future (update-state (deref position) (apply comand x))
- (if (== (deref position) y)
-   ((update-position y))
- (swap! position inc))
+ (future 
+   (update-state (deref position) (apply comand x))
+ 	(if (== (deref position) y)
+   		((update-position y))
+ 		(swap! position inc))
  ))
 
 (defn adder [x]  (imba x + 3)  )
@@ -37,8 +38,15 @@
 (adder [1 6])
 (adder [1 6 2])
 (adder [1 6 1])
-(adder [1 1])
-(adder [1 1])
-(adder [1 1])
+(adder [0 1])
+(adder [7 1])
+(adder [6 1])
 
 (prn (pprint-map (deref state)))
+
+;Output: 
+;{
+;3 : 8
+;2 : 1
+;1 : 7
+;}nil
