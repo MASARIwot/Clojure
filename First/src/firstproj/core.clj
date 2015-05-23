@@ -1,4 +1,3 @@
-(ns firstproj.core)
 
 (def position (atom 1))
 (def state (atom {}))
@@ -22,31 +21,31 @@
 (defn imba
   "x - function to memoize,
    y - number of last calls to cache"
-  [x comand y]
+  [x comand]
+
  (future 
    (update-state (deref position) (apply comand x))
- 	(if (== (deref position) y)
-   		((update-position y))
+ 	(if (== (deref position) 3)
+   		((update-position 3))
  		(swap! position inc))
  ))
 
-(defn adder [x]  (imba x + 3)  )
+(defn adder [x]  (imba x +))
+(defn subtract [x]  (imba x -))
 
 (adder [1 1])
 (adder [1 1])
 (adder [1 1])
 (adder [1 6])
-(adder [1 6 2])
 (adder [1 6 1])
-(adder [0 1])
-(adder [7 1])
-(adder [6 1])
+(subtract [1 6 1])
+(adder [1 1])
 
 (prn (pprint-map (deref state)))
 
 ;Output: 
 ;{
-;3 : 8
-;2 : 1
-;1 : 7
+;3 : -6
+;2 : 8
+;1 : 2
 ;}nil
